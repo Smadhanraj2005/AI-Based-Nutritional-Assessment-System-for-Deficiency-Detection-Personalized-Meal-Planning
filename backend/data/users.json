@@ -1,0 +1,80 @@
+[
+  {
+    "name": "Madhan",
+    "email": "smadhanmad2005@gmail.com",
+    "password": "Madhanraj@2005",
+    "age": 20,
+    "gender": "Male",
+    "weight_kg": 65.0,
+    "height_kg": 170.0,
+    "dietary_restrictions": [
+      "Vegetarian"
+    ],
+    "token": "token_-3433992852952666295_Mad"
+  },
+  {
+    "name": "suman",
+    "email": "suman@gamil.com",
+    "password": "suman@1245678",
+    "age": 20,
+    "gender": "Male",
+    "weight_kg": 65.0,
+    "height_kg": 170.0,
+    "dietary_restrictions": [
+      "Vegetarian"
+    ],
+    "token": "token_-3211656341082379580_sum"
+  },
+  {
+    "name": "Jane Doe",
+    "email": "jane@example.com",
+    "password": "securepassword",
+    "age": 29,
+    "gender": "Female",
+    "weight_kg": 65.0,
+    "height_kg": 170.0,
+    "dietary_restrictions": [
+      "Vegan"
+    ],
+    "token": "token_8875289282399600516_Jan"
+  },
+  {
+    "name": "Jane Doe",
+    "email": "jane_7f6fcf@example.com",
+    "password": "securepassword",
+    "age": 29,
+    "gender": "Female",
+    "weight_kg": 65.0,
+    "height_kg": 170.0,
+    "dietary_restrictions": [
+      "Vegan"
+    ],
+    "token": "token_-6140708801219538158_Jan"
+  },
+  {
+    "name": "Madhanr",
+    "email": "smadhanm@gmail.com",
+    "password": "Madhanraj@2005",
+    "age": 20,
+    "gender": "Male",
+    "weight_kg": 65.0,
+    "height_kg": 170.0,
+    "dietary_restrictions": [
+      "Vegetarian"
+    ],
+    "token": "token_-4089469465848107494_Mad"
+  },
+  {
+    "name": "maddy",
+    "email": "maddy@gmail.com",
+    "password": "Madhnaraj@2--6",
+    "age": 26,
+    "gender": "Male",
+    "weight_kg": 65.0,
+    "height_kg": 170.0,
+    "dietary_restrictions": [
+      "Vegetarian"
+    ],
+    "token": "token_4913856251818529890_mad"
+  }
+]

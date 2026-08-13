@@ -1,0 +1,104 @@
+[
+  {
+    "id": "rec_1",
+    "name": "Iron & Folate Citrus Spinach Super Salad",
+    "description": "A crisp, nutrient-packed salad pairing non-heme iron from fresh spinach and pumpkin seeds with vitamin C rich oranges for maximum bio-absorption.",
+    "prep_time_mins": 15,
+    "cook_time_mins": 0,
+    "servings": 2,
+    "calories_per_serving": 280,
+    "target_deficiencies": ["Iron Deficiency (Anemia)", "Folate (Vitamin B9) Deficiency", "Vitamin C Deficiency"],
+    "dietary_tags": ["Vegan", "Vegetarian", "Gluten-Free", "Dairy-Free"],
+    "ingredients": [
+      "2 cups Fresh Baby Spinach",
+      "1 large Citrus Orange (peeled & segmented)",
+      "3 tbsp Roasted Pumpkin Seeds",
+      "1/2 cup Cooked Brown Lentils",
+      "1 tbsp Cold-Pressed Olive Oil",
+      "1 tbsp Fresh Lemon Juice",
+      "Pinch of Sea Salt & Cracked Black Pepper"
+    ],
+    "instructions": [
+      "Wash baby spinach thoroughly and pat dry with paper towels.",
+      "In a large bowl, combine baby spinach, citrus orange segments, cooked lentils, and roasted pumpkin seeds.",
+      "Whisk olive oil, fresh lemon juice, sea salt, and black pepper in a small ramekin to create the dressing.",
+      "Drizzle dressing evenly over salad, toss gently, and serve immediately."
+    ]
+  },
+  {
+    "id": "rec_2",
+    "name": "Pan-Seared Wild Salmon with Herb Sweet Potato Mash",
+    "description": "Omega-3 rich wild salmon providing high-potency Vitamin D, B12, and Iodine, alongside beta-carotene packed roasted sweet potato mash.",
+    "prep_time_mins": 15,
+    "cook_time_mins": 25,
+    "servings": 2,
+    "calories_per_serving": 460,
+    "target_deficiencies": ["Vitamin D Deficiency", "Vitamin B12 Deficiency", "Vitamin A Deficiency", "Iodine Deficiency"],
+    "dietary_tags": ["Gluten-Free", "Dairy-Free", "High-Protein", "Pescatarian"],
+    "ingredients": [
+      "2 Wild Salmon Fillets (150g each)",
+      "2 Medium Sweet Potatoes (peeled and diced)",
+      "1 tbsp Olive Oil",
+      "1 tsp Garlic Powder",
+      "1 tbsp Fresh Rosemary (minced)",
+      "Sea Salt and Cracked Black Pepper to taste"
+    ],
+    "instructions": [
+      "Boil diced sweet potatoes in salted water for 15 minutes until fork-tender, then mash with olive oil and rosemary.",
+      "Season salmon fillets generously with salt, pepper, and garlic powder.",
+      "Heat olive oil in a skillet over medium-high heat. Sear salmon skin-side down for 4-5 minutes until crispy.",
+      "Flip salmon and cook for another 3 minutes until medium-rare to medium.",
+      "Plate salmon over hot sweet potato mash and enjoy."
+    ]
+  },
+  {
+    "id": "rec_3",
+    "name": "Magnesium-Rich Almond & Berry Greek Yogurt Bowl",
+    "description": "Creamy Greek yogurt layered with toasted almond slices, chia seeds, and fresh berries to rebuild calcium, magnesium, and gut health.",
+    "prep_time_mins": 10,
+    "cook_time_mins": 0,
+    "servings": 1,
+    "calories_per_serving": 320,
+    "target_deficiencies": ["Calcium Deficiency", "Magnesium Deficiency", "Vitamin B12 Deficiency", "Zinc Deficiency"],
+    "dietary_tags": ["Vegetarian", "Gluten-Free", "High-Protein"],
+    "ingredients": [
+      "1 cup Plain Greek Yogurt",
+      "2 tbsp Raw Sliced Almonds",
+      "1 tbsp Roasted Pumpkin Seeds",
+      "1/2 cup Mixed Berries (Blueberries & Raspberries)",
+      "1 tsp Pure Maple Syrup or Honey"
+    ],
+    "instructions": [
+      "Scoop Greek yogurt into a chilled serving bowl.",
+      "Top with fresh blueberries and raspberries.",
+      "Sprinkle raw sliced almonds and pumpkin seeds evenly over the top.",
+      "Drizzle with honey or maple syrup before serving."
+    ]
+  },
+  {
+    "id": "rec_4",
+    "name": "Golden Turmeric Lentil & Spinach Stew",
+    "description": "Hearty plant protein stew loaded with iron, zinc, and magnesium from brown lentils, spinach, and anti-inflammatory spices.",
+    "prep_time_mins": 15,
+    "cook_time_mins": 30,
+    "servings": 4,
+    "calories_per_serving": 310,
+    "target_deficiencies": ["Iron Deficiency (Anemia)", "Folate (Vitamin B9) Deficiency", "Zinc Deficiency", "Magnesium Deficiency"],
+    "dietary_tags": ["Vegan", "Vegetarian", "Gluten-Free", "Dairy-Free", "Halal"],
+    "ingredients": [
+      "1 cup Brown or Green Lentils (rinsed)",
+      "2 cups Fresh Spinach (choped)",
+      "1 Large Sweet Potato (cubed)",
+      "1 Onion & 3 Garlic Cloves (minced)",
+      "1 tsp Ground Turmeric & 1 tsp Cumin",
+      "4 cups Low-Sodium Vegetable Broth",
+      "1 tbsp Olive Oil"
+    ],
+    "instructions": [
+      "Sauté onion and garlic in olive oil until translucent (about 5 minutes).",
+      "Add ground turmeric, cumin, cubed sweet potato, and rinsed lentils. Stir for 2 minutes to toast spices.",
+      "Pour in vegetable broth, bring to a boil, then reduce heat to low and simmer for 25 minutes until lentils are soft.",
+      "Stir in chopped spinach during the last 3 minutes of cooking until wilted. Serve hot with a squeeze of fresh lemon."
+    ]
+  }
+]

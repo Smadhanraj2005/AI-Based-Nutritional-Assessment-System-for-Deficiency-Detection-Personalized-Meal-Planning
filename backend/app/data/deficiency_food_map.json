@@ -1,0 +1,52 @@
+{
+  "Iron Deficiency (Anemia)": {
+    "recommended_foods": ["Spinach (Raw)", "Lentils (Cooked)", "Pumpkin Seeds (Roasted)", "Beef Liver (Pan-fried)", "Almonds (Raw)"],
+    "dietary_notes": "Combine plant-based iron (non-heme) with Vitamin C rich foods like oranges or sweet potatoes to boost absorption by up to 300%. Avoid tea or coffee with iron-rich meals.",
+    "supplements": ["Ferrous Sulfate (65mg elemental iron daily with Vit C)", "Iron Bisglycinate (gentle on stomach)"]
+  },
+  "Vitamin D Deficiency": {
+    "recommended_foods": ["Salmon (Grilled)", "Eggs (Whole, Boiled)", "Fortified Soy Milk", "Cod Fish (Baked)", "Greek Yogurt (Plain, Whole)"],
+    "dietary_notes": "Vitamin D is fat-soluble. Consume with healthy fats like olive oil, avocado, or nuts to optimize intestinal absorption.",
+    "supplements": ["Vitamin D3 (2000-5000 IU daily taken with meals)", "Magnesium co-factor"]
+  },
+  "Vitamin B12 Deficiency": {
+    "recommended_foods": ["Salmon (Grilled)", "Beef Liver (Pan-fried)", "Eggs (Whole, Boiled)", "Greek Yogurt (Plain, Whole)", "Fortified Soy Milk"],
+    "dietary_notes": "Essential for nerve function and RBC formation. Plant-based individuals must consume fortified plant milks, nutritional yeast, or sublingual B12.",
+    "supplements": ["Methylcobalamin B12 (1000 mcg sublingual daily)"]
+  },
+  "Calcium Deficiency": {
+    "recommended_foods": ["Greek Yogurt (Plain, Whole)", "Almonds (Raw)", "Fortified Soy Milk", "Spinach (Raw)", "Eggs (Whole, Boiled)"],
+    "dietary_notes": "Crucial for bone density and muscle contractions. Pair with Vitamin D for optimal bone deposition.",
+    "supplements": ["Calcium Citrate (500mg twice daily with meals)"]
+  },
+  "Folate (Vitamin B9) Deficiency": {
+    "recommended_foods": ["Spinach (Raw)", "Lentils (Cooked)", "Pumpkin Seeds (Roasted)", "Sweet Potato (Baked)", "Almonds (Raw)"],
+    "dietary_notes": "Key for cellular synthesis and neural tube prevention. Steam greens lightly to prevent thermal destruction of folate.",
+    "supplements": ["L-Methylfolate (400-800 mcg daily)"]
+  },
+  "Zinc Deficiency": {
+    "recommended_foods": ["Pumpkin Seeds (Roasted)", "Beef Liver (Pan-fried)", "Almonds (Raw)", "Lentils (Cooked)", "Eggs (Whole, Boiled)"],
+    "dietary_notes": "Supports immune defenses and taste integrity. Soak seeds and legumes to neutralize phytates that bind zinc.",
+    "supplements": ["Zinc Picolinate or Gluconate (15-30 mg daily)"]
+  },
+  "Vitamin A Deficiency": {
+    "recommended_foods": ["Beef Liver (Pan-fried)", "Sweet Potato (Baked)", "Spinach (Raw)", "Eggs (Whole, Boiled)", "Greek Yogurt (Plain, Whole)"],
+    "dietary_notes": "Vital for vision, immunity, and skin barrier health. Beta-carotene in sweet potato converts to active Retinol in body.",
+    "supplements": ["Cod Liver Oil or Vitamin A Palmitate (5000 IU daily)"]
+  },
+  "Vitamin C Deficiency": {
+    "recommended_foods": ["Oranges (Fresh)", "Spinach (Raw)", "Sweet Potato (Baked)", "Pumpkin Seeds (Roasted)"],
+    "dietary_notes": "Powerful antioxidant supporting collagen synthesis and iron uptake. Heat degrades Vit C, so consume fresh fruits raw.",
+    "supplements": ["Ascorbic Acid or Liposomal Vitamin C (500-1000 mg daily)"]
+  },
+  "Magnesium Deficiency": {
+    "recommended_foods": ["Pumpkin Seeds (Roasted)", "Almonds (Raw)", "Spinach (Raw)", "Lentils (Cooked)", "Cod Fish (Baked)"],
+    "dietary_notes": "Regulates muscle relaxation, mood, and over 300 enzymatic pathways. High stress increases magnesium excretion.",
+    "supplements": ["Magnesium Glycinate or Citrate (300-400 mg at night)"]
+  },
+  "Iodine Deficiency": {
+    "recommended_foods": ["Cod Fish (Baked)", "Greek Yogurt (Plain, Whole)", "Eggs (Whole, Boiled)", "Salmon (Grilled)"],
+    "dietary_notes": "Essential for thyroid hormone production (T3/T4) and metabolic regulation. Use iodized salt or sea vegetables.",
+    "supplements": ["Potassium Iodide (150 mcg daily)"]
+  }
+}
