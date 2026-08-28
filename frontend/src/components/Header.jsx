@@ -1,58 +1,97 @@
-import React from 'react';
-import { Activity, ShieldCheck, HeartPulse, Sparkles, User, Calendar, BarChart3, LogIn, LogOut, ChevronDown } from 'lucide-react';
+import React, { useState } from 'react';
+import { Activity, ShieldCheck, TestTube2, HeartPulse, Sparkles, User, Calendar, BarChart3, LogIn, LogOut, ChevronDown, Mail } from 'lucide-react';
+import logoImg from '../assets/logo.png';
 
 export default function Header({ activeTab, setActiveTab, healthScore, currentUser, onOpenAuth, onLogout }) {
+  const [showMenu, setShowMenu] = useState(false);
+
   return (
-    <header className="glass-card" style={{
+    <header className="glass-card header-root" style={{
       borderRadius: 0,
       borderTop: 'none',
       borderLeft: 'none',
       borderRight: 'none',
-      padding: '14px 24px',
+      padding: '12px 24px',
       position: 'sticky',
       top: 0,
       zIndex: 100
     }}>
-      <div style={{ maxWidth: 1400, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+      <div className="header-top-wrapper" style={{ maxWidth: 1400, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 14 }}>
 
-        {/* Brand */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{
-            width: 44, height: 44, borderRadius: 12,
-            background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 4px 16px rgba(16, 185, 129, 0.4)'
-          }}>
-            <HeartPulse size={26} color="#fff" />
+        {/* Brand Bar (Contains Brand logo + user menu on right in mobile) */}
+        <div className="header-brand-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }} onClick={() => setActiveTab && setActiveTab('dashboard')}>
+            <img
+              src={logoImg}
+              alt="NutriAI Logo"
+              style={{
+                width: 38,
+                height: 38,
+                borderRadius: 10,
+                objectFit: 'cover',
+                boxShadow: '0 4px 16px rgba(16, 185, 129, 0.4)',
+                border: '1px solid rgba(16, 185, 129, 0.3)'
+              }}
+            />
+            <div>
+              <h1 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', margin: 0, display: 'flex', alignItems: 'center', gap: 6, letterSpacing: '-0.02em' }}>
+                Nutri<span style={{ color: 'var(--primary)' }}>AI</span>
+              </h1>
+              <p className="header-subtitle" style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: 0 }}>
+                Deficiency Assessment Engine
+              </p>
+            </div>
           </div>
-          <div>
-            <h1 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#fff', margin: 0, display: 'flex', alignItems: 'center', gap: 8 }}>
-              NutriAI
-              <span style={{ fontSize: '0.7rem', padding: '2px 8px', borderRadius: 4, background: 'rgba(99, 102, 241, 0.2)', color: '#818cf8', border: '1px solid rgba(99, 102, 241, 0.3)' }}>
-                ML Engine v1.0
-              </span>
-            </h1>
-            <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', margin: 0 }}>
-              AI Nutritional Deficiency Detection & Meal Planning
-            </p>
+
+          {/* User Chip for Mobile Top Right */}
+          <div className="header-user-mobile">
+            {currentUser && (
+              <div
+                style={{ position: 'relative' }}
+                onClick={() => setShowMenu(v => !v)}
+              >
+                <div style={{
+                  display: 'flex', alignItems: 'center', gap: 6,
+                  background: 'rgba(255,255,255,0.06)',
+                  padding: '4px 10px', borderRadius: 30,
+                  border: '1px solid var(--border-glass)',
+                  cursor: 'pointer'
+                }}>
+                  <div style={{
+                    width: 28, height: 28, borderRadius: '50%',
+                    background: 'linear-gradient(135deg, #6366f1, #818cf8)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: '0.85rem', fontWeight: 700, color: '#fff'
+                  }}>
+                    {currentUser.name?.charAt(0).toUpperCase() || 'U'}
+                  </div>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-main)', fontWeight: 600 }}>
+                    {currentUser.name?.split(' ')[0]}
+                  </span>
+                  <ChevronDown size={13} color="var(--text-muted)" />
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Navigation Tabs — only shown when logged in */}
+        {/* Navigation Tabs — single-row touch scroll on mobile */}
         {currentUser && (
-          <nav style={{ display: 'flex', gap: 6, background: 'rgba(15, 23, 42, 0.6)', padding: 4, borderRadius: 12, border: '1px solid var(--border-glass)' }}>
+          <nav className="header-nav-container">
             {[
-              { id: 'dashboard', icon: <Activity size={15} />, label: 'Dashboard' },
-              { id: 'diary', icon: <Calendar size={15} />, label: 'Diary' },
-              { id: 'mealplan', icon: <Sparkles size={15} />, label: 'Meal Plan' },
-              { id: 'analytics', icon: <BarChart3 size={15} />, label: 'Progress' },
-              { id: 'profile', icon: <User size={15} />, label: 'Profile' },
+              { id: 'dashboard', icon: <Activity size={14} />, label: 'Dashboard' },
+              { id: 'diary', icon: <Calendar size={14} />, label: 'Diary' },
+              { id: 'bloodtest', icon: <TestTube2 size={14} />, label: 'Lab Results' },
+              { id: 'assessment', icon: <ShieldCheck size={14} />, label: 'Assessment' },
+              { id: 'mealplan', icon: <Sparkles size={14} />, label: 'Meal Plan' },
+              { id: 'analytics', icon: <BarChart3 size={14} />, label: 'Progress' },
+              { id: 'profile', icon: <User size={14} />, label: 'Profile' },
             ].map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`tab-btn ${activeTab === tab.id ? 'active' : ''}`}
-                style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: '0.85rem', padding: '8px 14px' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: '0.82rem', padding: '7px 13px', flexShrink: 0 }}
               >
                 {tab.icon} {tab.label}
               </button>
@@ -60,68 +99,103 @@ export default function Header({ activeTab, setActiveTab, healthScore, currentUs
           </nav>
         )}
 
-        {/* Right: Health Score + Auth */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          {/* Health score badge — shown after assessment */}
-          {currentUser && healthScore !== null && (
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: 10,
-              background: 'rgba(16, 185, 129, 0.1)',
-              padding: '7px 14px', borderRadius: 12,
-              border: '1px solid rgba(16, 185, 129, 0.2)'
-            }}>
-              <ShieldCheck size={20} color="#10b981" />
-              <div>
-                
-
-              </div>
-            </div>
-          )}
-
-          {/* Auth section */}
+        {/* Right: Desktop User Avatar & Popover Dropdown */}
+        <div className="header-user-desktop">
           {currentUser ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              {/* User Avatar Chip */}
+            <div
+              style={{ position: 'relative' }}
+              onMouseEnter={() => setShowMenu(true)}
+              onMouseLeave={() => setShowMenu(false)}
+            >
               <div style={{
                 display: 'flex', alignItems: 'center', gap: 8,
                 background: 'rgba(255,255,255,0.06)',
-                padding: '7px 14px', borderRadius: 30,
-                border: '1px solid var(--border-glass)'
+                padding: '6px 12px', borderRadius: 30,
+                border: '1px solid var(--border-glass)',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease'
               }}>
                 <div style={{
-                  width: 28, height: 28, borderRadius: '50%',
+                  width: 32, height: 32, borderRadius: '50%',
                   background: 'linear-gradient(135deg, #6366f1, #818cf8)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '0.8rem', fontWeight: 700, color: '#fff'
+                  fontSize: '0.9rem', fontWeight: 700, color: '#fff',
+                  boxShadow: '0 2px 8px rgba(99, 102, 241, 0.4)'
                 }}>
-                  {currentUser.name?.charAt(0).toUpperCase()}
+                  {currentUser.name?.charAt(0).toUpperCase() || 'U'}
                 </div>
-                <span style={{ fontSize: '0.85rem', color: '#fff', fontWeight: 500 }}>
+                <span style={{ fontSize: '0.85rem', color: 'var(--text-main)', fontWeight: 600 }}>
                   {currentUser.name?.split(' ')[0]}
                 </span>
+                <ChevronDown size={14} color="var(--text-muted)" />
               </div>
 
-              {/* Logout button */}
-              <button
-                onClick={onLogout}
-                style={{
-                  background: 'rgba(255,255,255,0.05)',
+              {/* Hover Popover Dropdown displaying Name, Email, Sign Out */}
+              {showMenu && (
+                <div style={{
+                  position: 'absolute',
+                  right: 0,
+                  top: '100%',
+                  marginTop: 6,
+                  width: 240,
+                  background: 'rgba(15, 23, 42, 0.95)',
+                  backdropFilter: 'blur(16px)',
                   border: '1px solid var(--border-glass)',
-                  color: 'var(--text-muted)',
-                  padding: '8px 12px',
-                  borderRadius: 10,
-                  cursor: 'pointer',
+                  borderRadius: 14,
+                  padding: 16,
+                  boxShadow: '0 12px 30px rgba(0, 0, 0, 0.6)',
+                  zIndex: 200,
                   display: 'flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  fontSize: '0.82rem',
-                  transition: 'all 0.2s ease'
-                }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = '#ef4444'; e.currentTarget.style.color = '#fca5a5'; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-glass)'; e.currentTarget.style.color = 'var(--text-muted)'; }}
-              >
-                <LogOut size={15} /> Sign Out
-              </button>
+                  flexDirection: 'column',
+                  gap: 12
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <div style={{
+                      width: 42, height: 42, borderRadius: '50%',
+                      background: 'linear-gradient(135deg, #6366f1, #818cf8)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontSize: '1.1rem', fontWeight: 700, color: '#fff',
+                      flexShrink: 0
+                    }}>
+                      {currentUser.name?.charAt(0).toUpperCase() || 'U'}
+                    </div>
+                    <div style={{ overflow: 'hidden' }}>
+                      <h4 style={{ margin: 0, fontSize: '0.95rem', color: '#fff', fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {currentUser.name}
+                      </h4>
+                      <p style={{ margin: '3px 0 0 0', fontSize: '0.78rem', color: 'var(--text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', display: 'flex', alignItems: 'center', gap: 4 }}>
+                        <Mail size={12} /> {currentUser.email}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div style={{ height: 1, background: 'var(--border-glass)', width: '100%' }} />
+
+                  <button
+                    onClick={onLogout}
+                    style={{
+                      background: 'rgba(239, 68, 68, 0.12)',
+                      border: '1px solid rgba(239, 68, 68, 0.3)',
+                      color: '#fca5a5',
+                      padding: '9px 12px',
+                      borderRadius: 10,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justify: 'center',
+                      gap: 8,
+                      fontSize: '0.85rem',
+                      fontWeight: 600,
+                      transition: 'all 0.2s ease',
+                      width: '100%'
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(239, 68, 68, 0.25)'; e.currentTarget.style.color = '#ef4444'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'rgba(239, 68, 68, 0.12)'; e.currentTarget.style.color = '#fca5a5'; }}
+                  >
+                    <LogOut size={15} /> Sign Out
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <button

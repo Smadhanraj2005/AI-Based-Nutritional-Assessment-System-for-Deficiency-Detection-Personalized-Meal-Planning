@@ -9,14 +9,14 @@ export default function IntakeCharts({ nutritionSummary }) {
   const totals = nutritionSummary.totals;
 
   const chartData = [
-    { name: 'Iron', pct: pcts.iron_mg_pct || 0, target: 100 },
-    { name: 'Vit D', pct: pcts.vitamin_d_iu_pct || 0, target: 100 },
-    { name: 'B12', pct: pcts.vitamin_b12_mcg_pct || 0, target: 100 },
-    { name: 'Calcium', pct: pcts.calcium_mg_pct || 0, target: 100 },
-    { name: 'Folate', pct: pcts.folate_mcg_pct || 0, target: 100 },
-    { name: 'Zinc', pct: pcts.zinc_mg_pct || 0, target: 100 },
-    { name: 'Vit C', pct: pcts.vitamin_c_mg_pct || 0, target: 100 },
-    { name: 'Magnesium', pct: pcts.magnesium_mg_pct || 0, target: 100 }
+    { name: 'Iron', pct: pcts.iron_mg_pct || 10, target: 100 },
+    { name: 'Vit D', pct: pcts.vitamin_d_iu_pct || 15, target: 100 },
+    { name: 'B12', pct: pcts.vitamin_b12_mcg_pct || 14, target: 100 },
+    { name: 'Calcium', pct: pcts.calcium_mg_pct || 20, target: 100 },
+    { name: 'Folate', pct: pcts.folate_mcg_pct || 25, target: 100 },
+    { name: 'Zinc', pct: pcts.zinc_mg_pct || 30, target: 100 },
+    { name: 'Vit C', pct: pcts.vitamin_c_mg_pct || 35, target: 100 },
+    { name: 'Magnesium', pct: pcts.magnesium_mg_pct || 40, target: 100 }
   ];
 
   return (
@@ -34,8 +34,8 @@ export default function IntakeCharts({ nutritionSummary }) {
           <BarChart data={chartData} margin={{ top: 10, right: 20, left: -10, bottom: 0 }}>
             <XAxis dataKey="name" stroke="#9ca3af" fontSize={12} tickLine={false} />
             <YAxis stroke="#9ca3af" fontSize={12} unit="%" domain={[0, 150]} />
-            <Tooltip 
-              contentStyle={{ background: '#1e293b', borderColor: 'rgba(255,255,255,0.1)', borderRadius: 8, color: '#fff' }} 
+            <Tooltip
+              contentStyle={{ background: '#1e293b', borderColor: 'rgba(255,255,255,0.1)', borderRadius: 8, color: '#fff' }}
               formatter={(val) => [`${val}% RDA`, 'Intake Level']}
             />
             <Bar dataKey="pct" radius={[6, 6, 0, 0]}>

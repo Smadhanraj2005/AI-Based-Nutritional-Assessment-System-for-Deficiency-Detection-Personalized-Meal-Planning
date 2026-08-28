@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Formulas Specification - AI Nutritional Health System</title>
+  <!-- KaTeX CSS & JS for rendering LaTeX math formulas -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-dark: #047857;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #e2e8f0;
+    }
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 50px 60px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01);
+      border: 1px solid var(--border);
+    }
+    header {
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: var(--primary-dark);
+      margin: 0 0 6px 0;
+      font-weight: 800;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    .print-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.3);
+      transition: all 0.2s ease;
+    }
+    .print-btn:hover {
+      background: var(--primary-dark);
+    }
+    h2 {
+      font-size: 1.3rem;
+      color: var(--primary-dark);
+      margin-top: 36px;
+      margin-bottom: 16px;
+      border-left: 4px solid var(--primary);
+      padding-left: 12px;
+    }
+    h3 {
+      font-size: 1.05rem;
+      color: var(--text);
+      margin-top: 24px;
+      margin-bottom: 10px;
+    }
+    .formula-box {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 12px 0 20px 0;
+      font-size: 1.05rem;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px 0;
+      font-size: 0.92rem;
+    }
+    th, td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: #f8fafc;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .container { box-shadow: none; border: none; padding: 20px; max-width: 100%; }
+      .print-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    header { display: flex; justify-content: space-between; }
+    <header>
+      <div>
+        <h1>System Formulas Specification Manual</h1>
+        <p class="subtitle">AI-Based Nutritional Assessment System for Deficiency Detection & Personalized Meal Planning</p>
+      </div>
+      <button class="print-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+    </header>
+
+    <h2>1. Dietary Diary & Nutrient Intake Aggregation Formulas</h2>
+
+    <h3>1.1 Portion Gram Scale Factor</h3>
+    <div class="formula-box">$$\text{Scale Factor} = \frac{\text{portion\_grams}}{100.0}$$</div>
+
+    <h3>1.2 Item Nutrient Intake Calculation</h3>
+    <div class="formula-box">$$\text{Nutrient}_{\text{item}, k} = \text{Nutrient}_{\text{stored per 100g}, k} \times \text{Scale Factor}$$</div>
+
+    <h3>1.3 Daily Total Intake per Nutrient (on date $d$)</h3>
+    <div class="formula-box">$$\text{Daily Total}(k, d) = \sum_{i \in \text{Items logged on } d} \text{Nutrient}_{i, k}$$</div>
+
+    <h3>1.4 Multi-Day Daily Average Intake</h3>
+    <div class="formula-box">$$\text{Daily Average}(k) = \frac{\sum_{d \in D} \text{Daily Total}(k, d)}{N_{\text{distinct days}}} \quad \text{where } N_{\text{distinct days}} = \max(1, |D|)$$</div>
+
+    <h3>1.5 Vitamin D Unit Conversion</h3>
+    <div class="formula-box">$$\text{Vitamin D (mcg)} = \frac{\text{Vitamin D (IU)}}{40.0}, \quad \text{Vitamin D (IU)} = \text{Vitamin D (mcg)} \times 40.0$$</div>
+
+    <h2>2. Recommended Dietary Allowance (% RDA) Formulas</h2>
+
+    <h3>2.1 Percentage of RDA (% RDA)</h3>
+    <div class="formula-box">$$\% \text{RDA}(k) = \operatorname{round}\left( \frac{\text{Daily Average}(k)}{\text{RDA Target}(k)} \times 100.0, 1 \right)$$</div>
+
+    <h3>2.2 Gender-Adjusted RDA Reference Baselines</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Nutrient ($k$)</th>
+          <th>Male Target Baseline</th>
+          <th>Female Target Baseline</th>
+          <th>Unit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Calories</td><td>2000.0</td><td>2000.0</td><td>kcal</td></tr>
+        <tr><td>Protein</td><td>56.0</td><td>46.0</td><td>g</td></tr>
+        <tr><td>Iron</td><td>8.0</td><td>18.0</td><td>mg</td></tr>
+        <tr><td>Calcium</td><td>1000.0</td><td>1000.0</td><td>mg</td></tr>
+        <tr><td>Vitamin D</td><td>15.0 (600 IU)</td><td>15.0 (600 IU)</td><td>mcg</td></tr>
+        <tr><td>Vitamin B12</td><td>2.4</td><td>2.4</td><td>mcg</td></tr>
+        <tr><td>Folate (B9)</td><td>400.0</td><td>400.0</td><td>mcg</td></tr>
+        <tr><td>Vitamin A</td><td>900.0</td><td>700.0</td><td>mcg</td></tr>
+        <tr><td>Vitamin C</td><td>90.0</td><td>75.0</td><td>mg</td></tr>
+        <tr><td>Magnesium</td><td>400.0</td><td>310.0</td><td>mg</td></tr>
+        <tr><td>Zinc</td><td>11.0</td><td>8.0</td><td>mg</td></tr>
+      </tbody>
+    </table>
+
+    <h2>3. Machine Learning Input Feature Encoding & Inference</h2>
+
+    <h3>3.1 Gender Categorical Encoding</h3>
+    <div class="formula-box">$$\text{gender\_num} = \begin{cases} 1.0 & \text{if Gender } \in \{\text{"Male"}, \text{"1"}, \text{"m"}\} \\ 2.0 & \text{if Gender } \in \{\text{"Female"}, \text{"2"}, \text{"f"}\} \end{cases}$$</div>
+
+    <h3>3.2 Standard Feature Normalization (StandardScaler)</h3>
+    <div class="formula-box">$$X_{\text{scaled}, j} = \frac{X_j - \mu_j}{\sigma_j}$$</div>
+
+    <h3>3.3 13-Feature Input Vector Order</h3>
+    <div class="formula-box">$$X_{\text{input}} = [\text{gender}, \text{age\_years}, \text{calories\_kcal}, \text{protein\_g}, \text{iron\_mg}, \text{calcium\_mg}, \text{vitamin\_d\_mcg}, \text{vitamin\_b12\_mcg}, \text{folate\_mcg}, \text{vitamin\_a\_mcg}, \text{vitamin\_c\_mg}, \text{magnesium\_mg}, \text{zinc\_mg}]$$</div>
+
+    <h3>3.4 Multi-Output Random Forest Ensemble Probability Inference</h3>
+    <div class="formula-box">$$P_{\text{raw}}(\text{Deficiency}_k = 1 \mid X) = \frac{1}{T} \sum_{t=1}^{T} P_t(\text{Deficiency}_k = 1 \mid X_{\text{scaled}})$$</div>
+
+    <h2>4. Clinical RDA Intake Calibration Rules</h2>
+    <p>Let $\text{Ratio}_k = \frac{\text{Daily Average}(k)}{\text{RDA Target}(k)}$:</p>
+    <div class="formula-box">
+      $$P_{\text{calibrated}}(k) = \begin{cases} 
+      \min(P_{\text{raw}}(k), 0.15) & \text{if } \text{Ratio}_k \ge 1.0 \quad (100\%+\text{ RDA met}) \\
+      \min(P_{\text{raw}}(k), 0.38) & \text{if } 0.70 \le \text{Ratio}_k < 1.0 \quad (70-99\%\text{ RDA met}) \\
+      \max(P_{\text{raw}}(k), 0.38) & \text{if } 0.40 \le \text{Ratio}_k < 0.70 \quad (40-69\%\text{ RDA met}) \\
+      \max(P_{\text{raw}}(k), 0.48) & \text{if } \text{Ratio}_k < 0.40 \quad (<40\%\text{ RDA met})
+      \end{cases}$$
+    </div>
+
+    <h2>5. Post-Prediction Clinical Laboratory Boost Rules</h2>
+
+    <h3>5.1 Hemoglobin Clinical Boost (Anemia)</h3>
+    <div class="formula-box">
+      $$\text{Hb Threshold} = \begin{cases} 12.0\text{ g/dL} & \text{if Female} \\ 13.0\text{ g/dL} & \text{if Male} \end{cases}$$
+      $$\text{if } \text{Hemoglobin} < \text{Hb Threshold} \implies P_{\text{final}}(\text{Iron}) = \max(P_{\text{calibrated}}(\text{Iron}), 0.75)$$
+    </div>
+
+    <h3>5.2 Ferritin & Serum Iron Clinical Boosts</h3>
+    <div class="formula-box">
+      $$\text{if } \text{Ferritin} < 30.0\text{ ng/mL} \implies P_{\text{final}}(\text{Iron}) = \max(P_{\text{calibrated}}(\text{Iron}), 0.70)$$
+      $$\text{if } \text{Serum Iron} < 30.0\text{ mcg/dL} \implies P_{\text{final}}(\text{Iron}) = \max(P_{\text{calibrated}}(\text{Iron}), 0.70)$$
+    </div>
+
+    <h3>5.3 Serum Vitamin D, B12 & Calcium Boosts</h3>
+    <div class="formula-box">
+      $$\text{if } \text{Serum Vit D} < 50.0\text{ ng/mL} \implies P_{\text{final}}(\text{Vit D}) = \max(P_{\text{calibrated}}(\text{Vit D}), 0.65)$$
+      $$\text{if } \text{Vit B12} < 200.0\text{ pg/mL} \implies P_{\text{final}}(\text{Vit B12}) = \max(P_{\text{calibrated}}(\text{Vit B12}), 0.60)$$
+      $$\text{if } \text{Calcium} < 8.5\text{ mg/dL} \implies P_{\text{final}}(\text{Calcium}) = \max(P_{\text{calibrated}}(\text{Calcium}), 0.55)$$
+    </div>
+
+    <h2>6. Overall Wellness Score & Risk Classification Formulas</h2>
+
+    <h3>6.1 Mean Deficiency Risk ($\bar{R}$)</h3>
+    <div class="formula-box">$$\bar{R} = \frac{1}{10} \sum_{k=1}^{10} P_{\text{final}}(\text{Deficiency}_k)$$</div>
+
+    <h3>6.2 Overall Health / Wellness Score</h3>
+    <div class="formula-box">$$\text{Wellness Score} = \operatorname{clamp}\left( \operatorname{round}\left( (1.0 - \bar{R}) \times 100.0, 1 \right), 0.0, 100.0 \right)$$</div>
+
+    <h3>6.3 Risk Level Banding Classification</h3>
+    <div class="formula-box">
+      $$\text{Risk Level}(P) = \begin{cases} \text{HIGH} & \text{if } P \ge 0.66 \\ \text{MODERATE} & \text{if } 0.35 \le P < 0.66 \\ \text{LOW} & \text{if } P < 0.35 \end{cases}$$
+    </div>
+
+    <h2>7. Recommended Foods Ranking & Search Formulas</h2>
+
+    <h3>7.1 Catalog Ranking Order</h3>
+    <div class="formula-box">
+      $$\text{ORDER BY } \text{source\_priority ASC}, \text{nutrient\_column DESC}$$
+      $$\text{where } \text{source\_priority} = \begin{cases} 0 & \text{Curated Indian Foods (\text{data/seed\_foods.json})} \\ 1 & \text{IFCT 2017 Dataset (~542 NIN Hyderabad Foods)} \\ 2 & \text{USDA FoodData Central Fallback} \end{cases}$$
+    </div>
+
+    <h3>7.2 Candidate Fetch Pool Size</h3>
+    <div class="formula-box">$$N_{\text{candidates}} = \max(\text{limit} \times 8, 48)$$</div>
+
+    <h3>7.3 Setup Progress Ring Percentage & Stroke Dash</h3>
+    <div class="formula-box">
+      $$\text{Setup Percentage} = \left( \frac{\sum_{m=1}^{4} \mathbb{I}(\text{Step}_m \text{ complete})}{4} \right) \times 100$$
+      $$\text{SVG Fill Offset} = (2 \pi \cdot 28) \times \left( \frac{\text{Setup Percentage}}{100} \right)$$
+    </div>
+
+  </div>
+</body>
+</html>

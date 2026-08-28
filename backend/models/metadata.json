@@ -1,0 +1,46 @@
+{
+  "feature_names": [
+    "gender",
+    "age_years",
+    "calories_kcal",
+    "protein_g",
+    "iron_mg",
+    "calcium_mg",
+    "vitamin_d_mcg",
+    "vitamin_b12_mcg",
+    "folate_mcg",
+    "vitamin_a_mcg",
+    "vitamin_c_mg",
+    "magnesium_mg",
+    "zinc_mg"
+  ],
+  "target_cols": [
+    "label_iron",
+    "label_vitamin_d",
+    "label_vitamin_b12",
+    "label_calcium",
+    "label_folate",
+    "label_zinc",
+    "label_vitamin_a",
+    "label_vitamin_c",
+    "label_magnesium",
+    "label_protein"
+  ],
+  "target_labels_map": {
+    "label_iron": "Iron Deficiency (Anemia)",
+    "label_vitamin_d": "Vitamin D Deficiency",
+    "label_vitamin_b12": "Vitamin B12 Deficiency",
+    "label_calcium": "Calcium Deficiency",
+    "label_folate": "Folate (Vitamin B9) Deficiency",
+    "label_zinc": "Zinc Deficiency",
+    "label_vitamin_a": "Vitamin A Deficiency",
+    "label_vitamin_c": "Vitamin C Deficiency",
+    "label_magnesium": "Magnesium Deficiency",
+    "label_protein": "Protein Deficiency"
+  },
+  "accuracy": 0.8016666666666666,
+  "f1_macro": 0.9881828886697314,
+  "f1_micro": 0.9828604349704738,
+  "train_samples": 2400,
+  "test_samples": 600
+}

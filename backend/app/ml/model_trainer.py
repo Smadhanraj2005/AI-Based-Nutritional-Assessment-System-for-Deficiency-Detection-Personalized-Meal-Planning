@@ -15,33 +15,30 @@ except ImportError:
     from app.ml.dataset_generator import generate_nutritional_dataset
 
 FEATURE_COLS = [
-    "age", "gender", "bmi",
-    "iron_intake_pct", "vit_d_intake_pct", "vit_b12_intake_pct", "calcium_intake_pct", 
-    "folate_intake_pct", "zinc_intake_pct", "vit_a_intake_pct", "vit_c_intake_pct", 
-    "mag_intake_pct", "iodine_intake_pct",
-    "fatigue", "hair_loss", "pale_skin", "muscle_weakness", "mood_changes", 
-    "brittle_nails", "bleeding_gums", "dry_skin", "cold_intolerance", "slow_healing",
-    "hemoglobin_g_dl", "vit_d_ng_ml", "vit_b12_pg_ml", "serum_iron_mcg_dl", "calcium_mg_dl"
+    "gender", "age_years", "calories_kcal", "protein_g", "iron_mg", "calcium_mg",
+    "vitamin_d_mcg", "vitamin_b12_mcg", "folate_mcg", "vitamin_a_mcg", "vitamin_c_mg",
+    "magnesium_mg", "zinc_mg"
 ]
 
 TARGET_COLS = [
-    "target_iron", "target_vit_d", "target_vit_b12", "target_calcium", 
-    "target_folate", "target_zinc", "target_vit_a", "target_vit_c", 
-    "target_mag", "target_iodine"
+    "label_iron", "label_vitamin_d", "label_vitamin_b12", "label_calcium",
+    "label_folate", "label_zinc", "label_vitamin_a", "label_vitamin_c",
+    "label_magnesium", "label_protein"
 ]
 
 TARGET_LABELS_MAP = {
-    "target_iron": "Iron Deficiency (Anemia)",
-    "target_vit_d": "Vitamin D Deficiency",
-    "target_vit_b12": "Vitamin B12 Deficiency",
-    "target_calcium": "Calcium Deficiency",
-    "target_folate": "Folate (Vitamin B9) Deficiency",
-    "target_zinc": "Zinc Deficiency",
-    "target_vit_a": "Vitamin A Deficiency",
-    "target_vit_c": "Vitamin C Deficiency",
-    "target_mag": "Magnesium Deficiency",
-    "target_iodine": "Iodine Deficiency"
+    "label_iron": "Iron Deficiency (Anemia)",
+    "label_vitamin_d": "Vitamin D Deficiency",
+    "label_vitamin_b12": "Vitamin B12 Deficiency",
+    "label_calcium": "Calcium Deficiency",
+    "label_folate": "Folate (Vitamin B9) Deficiency",
+    "label_zinc": "Zinc Deficiency",
+    "label_vitamin_a": "Vitamin A Deficiency",
+    "label_vitamin_c": "Vitamin C Deficiency",
+    "label_magnesium": "Magnesium Deficiency",
+    "label_protein": "Protein Deficiency"
 }
+
 
 def train_and_save_model():
     print("[INFO] Generating synthetic training dataset based on WHO/NHANES patterns...")
@@ -56,17 +53,63 @@ def train_and_save_model():
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
     
-    print("[INFO] Training Multi-Output Random Forest Classifier...")
-    rf_base = RandomForestClassifier(n_estimators=120, max_depth=12, random_state=42, n_jobs=-1)
+    print("[INFO] Training Multi-Output Random Forest Classifier with custom hyperparameters...")
+    rf_base = RandomForestClassifier(
+        n_estimators=500,
+        max_depth=20,
+        min_samples_split=5,
+        min_samples_leaf=2,
+        max_features="sqrt",
+        bootstrap=True,
+        class_weight="balanced",
+        random_state=42,
+        n_jobs=-1
+    )
     model = MultiOutputClassifier(rf_base)
     model.fit(X_train_scaled, y_train)
     
     # Evaluation
+    print("\n" + "="*70)
+    print("SCORES — Random Forest (Validation Set)")
+    print("="*70)
+    
     y_pred = model.predict(X_test_scaled)
     acc = accuracy_score(y_test, y_pred)
     f1_macro = f1_score(y_test, y_pred, average="macro")
+    f1_micro = f1_score(y_test, y_pred, average="micro")
     
-    print(f"[SUCCESS] Model Trained Successfully! Accuracy: {acc:.4f} | Macro F1-Score: {f1_macro:.4f}")
+    print(f"Accuracy (overall): {acc:.4f} ({acc*100:.2f}%)")
+    print(f"F1 macro:           {f1_macro:.4f}")
+    print(f"F1 micro:           {f1_micro:.4f}")
+    
+    # Per-label metrics
+    print("\nPer-label Metrics:")
+    roc_aucs = []
+    
+    # Get probability predictions for ROC-AUC
+    raw_probs = model.predict_proba(X_test_scaled)
+    
+    for idx, col_name in enumerate(TARGET_COLS):
+        label_y_test = y_test.iloc[:, idx]
+        label_y_pred = y_pred[:, idx]
+        
+        # F1
+        score_f1 = f1_score(label_y_test, label_y_pred)
+        
+        # ROC-AUC
+        if len(raw_probs) > idx and len(raw_probs[idx][0]) > 1:
+            prob_positive = raw_probs[idx][:, 1]
+            try:
+                score_auc = roc_auc_score(label_y_test, prob_positive)
+            except Exception:
+                score_auc = 0.5
+        else:
+            score_auc = 0.5
+            
+        roc_aucs.append(score_auc)
+        print(f"  {col_name:<20} | F1: {score_f1:.4f} | ROC-AUC: {score_auc:.4f}")
+        
+    print("[SUCCESS] Model Trained Successfully!")
     
     # Save Model Artifacts
     current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -85,13 +128,30 @@ def train_and_save_model():
         "target_cols": TARGET_COLS,
         "target_labels_map": TARGET_LABELS_MAP,
         "accuracy": acc,
-        "f1_macro": f1_macro
+        "f1_macro": f1_macro,
+        "f1_micro": f1_micro,
+        "train_samples": int(len(X_train)),
+        "test_samples": int(len(X_test))
     }
     
     with open(meta_path, "w") as f:
         json.dump(metadata, f, indent=2)
         
-    print(f"[SUCCESS] Artifacts saved in {models_dir}")
+    with open(os.path.join(models_dir, "meta.json"), "w") as f:
+        json.dump(metadata, f, indent=2)
+        
+    # Sync with fallback directory backend/models
+    fallback_dir = os.path.join(os.path.dirname(current_dir), "..", "models")
+    os.makedirs(fallback_dir, exist_ok=True)
+    
+    import shutil
+    shutil.copy2(model_path, os.path.join(fallback_dir, "deficiency_model.joblib"))
+    shutil.copy2(model_path, os.path.join(fallback_dir, "random_forest_model.pkl"))
+    shutil.copy2(scaler_path, os.path.join(fallback_dir, "scaler.joblib"))
+    shutil.copy2(meta_path, os.path.join(fallback_dir, "metadata.json"))
+    shutil.copy2(meta_path, os.path.join(fallback_dir, "meta.json"))
+        
+    print(f"[SUCCESS] Artifacts saved in {models_dir} and synced to {fallback_dir}")
     return model, scaler, metadata
 
 if __name__ == "__main__":

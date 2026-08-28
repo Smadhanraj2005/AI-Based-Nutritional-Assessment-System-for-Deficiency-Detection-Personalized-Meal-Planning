@@ -1,52 +1,168 @@
 {
   "Iron Deficiency (Anemia)": {
-    "recommended_foods": ["Spinach (Raw)", "Lentils (Cooked)", "Pumpkin Seeds (Roasted)", "Beef Liver (Pan-fried)", "Almonds (Raw)"],
-    "dietary_notes": "Combine plant-based iron (non-heme) with Vitamin C rich foods like oranges or sweet potatoes to boost absorption by up to 300%. Avoid tea or coffee with iron-rich meals.",
-    "supplements": ["Ferrous Sulfate (65mg elemental iron daily with Vit C)", "Iron Bisglycinate (gentle on stomach)"]
+    "recommended_foods": [
+      "Beef Liver (Pan-fried)",
+      "Spinach (Raw)",
+      "Lentils (Cooked)",
+      "Pumpkin Seeds (Roasted)",
+      "Keerai Poriyal (Spinach)",
+      "Rajma Curry (Prepared)",
+      "Chole (Chickpea Curry)",
+      "Drumstick Leaves Poriyal",
+      "Amaranth Leaves Curry",
+      "Sprouted Green Gram Salad",
+      "Chicken Breast (Grilled)",
+      "Sardines (Grilled)"
+    ],
+    "dietary_notes": "Combine plant-based iron (non-heme) with Vitamin C rich foods like oranges or bell peppers to boost absorption by up to 300%. Avoid tea or coffee with iron-rich meals.",
+    "supplements": ["Ferrous Sulfate (325mg elemental iron Daily with Vit C)"]
   },
   "Vitamin D Deficiency": {
-    "recommended_foods": ["Salmon (Grilled)", "Eggs (Whole, Boiled)", "Fortified Soy Milk", "Cod Fish (Baked)", "Greek Yogurt (Plain, Whole)"],
-    "dietary_notes": "Vitamin D is fat-soluble. Consume with healthy fats like olive oil, avocado, or nuts to optimize intestinal absorption.",
-    "supplements": ["Vitamin D3 (2000-5000 IU daily taken with meals)", "Magnesium co-factor"]
+    "recommended_foods": [
+      "Salmon (Grilled)",
+      "Cod Fish (Baked)",
+      "Sardine Curry",
+      "Eggs (Whole, Boiled)",
+      "Egg Omelette (Indian Style)",
+      "Fortified Soy Milk",
+      "Fortified Almond Milk",
+      "Fortified Orange Juice",
+      "Mushrooms (UV-exposed)",
+      "Greek Yogurt (Plain, Whole)",
+      "Curd (Plain)",
+      "Fish Fry (Prepared)"
+    ],
+    "dietary_notes": "Vitamin D is fat-soluble. Consume with healthy fats like olive oil, avocado, or nuts to optimize intestinal absorption. Sun exposure 15-20 min daily also helps.",
+    "supplements": ["Vitamin D3 (2000-5000 IU Daily taken with meals)"]
   },
   "Vitamin B12 Deficiency": {
-    "recommended_foods": ["Salmon (Grilled)", "Beef Liver (Pan-fried)", "Eggs (Whole, Boiled)", "Greek Yogurt (Plain, Whole)", "Fortified Soy Milk"],
+    "recommended_foods": [
+      "Salmon (Grilled)",
+      "Beef Liver (Pan-fried)",
+      "Eggs (Whole, Boiled)",
+      "Sardine Curry",
+      "Fish Curry (Prepared)",
+      "Chicken Curry (Prepared)",
+      "Nutritional Yeast (Fortified)",
+      "Fortified Soy Milk",
+      "Fortified Almond Milk",
+      "Greek Yogurt (Plain, Whole)",
+      "Paneer (Indian Cottage Cheese)",
+      "Curd (Plain)"
+    ],
     "dietary_notes": "Essential for nerve function and RBC formation. Plant-based individuals must consume fortified plant milks, nutritional yeast, or sublingual B12.",
-    "supplements": ["Methylcobalamin B12 (1000 mcg sublingual daily)"]
+    "supplements": ["Methylcobalamin B12 (1000 mcg sublingual Daily)"]
   },
   "Calcium Deficiency": {
-    "recommended_foods": ["Greek Yogurt (Plain, Whole)", "Almonds (Raw)", "Fortified Soy Milk", "Spinach (Raw)", "Eggs (Whole, Boiled)"],
-    "dietary_notes": "Crucial for bone density and muscle contractions. Pair with Vitamin D for optimal bone deposition.",
-    "supplements": ["Calcium Citrate (500mg twice daily with meals)"]
+    "recommended_foods": [
+      "Paneer (Indian Cottage Cheese)",
+      "Greek Yogurt (Plain, Whole)",
+      "Curd (Plain)",
+      "Milk (Cow)",
+      "Fortified Soy Milk",
+      "Keerai Poriyal (Spinach)",
+      "Drumstick Leaves Poriyal",
+      "Palak Paneer (Prepared)",
+      "Chana Sundal",
+      "Almonds (Raw)"
+    ],
+    "dietary_notes": "Crucial for bone density and muscle contractions. Pair with Vitamin D for optimal bone deposition. Avoid excess caffeine which increases calcium excretion.",
+    "supplements": ["Calcium Citrate (500mg twice Daily with meals)"]
   },
   "Folate (Vitamin B9) Deficiency": {
-    "recommended_foods": ["Spinach (Raw)", "Lentils (Cooked)", "Pumpkin Seeds (Roasted)", "Sweet Potato (Baked)", "Almonds (Raw)"],
+    "recommended_foods": [
+      "Keerai Poriyal (Spinach)",
+      "Dal (Lentils, Cooked)",
+      "Rajma (Boiled)",
+      "Beetroot Poriyal",
+      "Sprouted Green Gram Salad",
+      "Boiled Chickpeas",
+      "Drumstick Leaves Poriyal",
+      "Amaranth Leaves Curry",
+      "Avocado (Fresh)",
+      "Beef Liver (Pan-fried)"
+    ],
     "dietary_notes": "Key for cellular synthesis and neural tube prevention. Steam greens lightly to prevent thermal destruction of folate.",
-    "supplements": ["L-Methylfolate (400-800 mcg daily)"]
+    "supplements": ["L-Methylfolate (400-800 mcg Daily)"]
   },
   "Zinc Deficiency": {
-    "recommended_foods": ["Pumpkin Seeds (Roasted)", "Beef Liver (Pan-fried)", "Almonds (Raw)", "Lentils (Cooked)", "Eggs (Whole, Boiled)"],
-    "dietary_notes": "Supports immune defenses and taste integrity. Soak seeds and legumes to neutralize phytates that bind zinc.",
-    "supplements": ["Zinc Picolinate or Gluconate (15-30 mg daily)"]
+    "recommended_foods": [
+      "Pumpkin Seeds (Roasted)",
+      "Beef Liver (Pan-fried)",
+      "Chicken Tikka",
+      "Chana Sundal",
+      "Peanut Sundal",
+      "Mutton Curry",
+      "Boiled Chickpeas",
+      "Soybean Curry",
+      "Almonds (Raw)",
+      "Curd (Plain)"
+    ],
+    "dietary_notes": "Supports immune defenses and gut integrity. Soak seeds and legumes to neutralize phytates that bind zinc.",
+    "supplements": ["Zinc Picolinate or Gluconate (15-30 mg Daily)"]
   },
   "Vitamin A Deficiency": {
-    "recommended_foods": ["Beef Liver (Pan-fried)", "Sweet Potato (Baked)", "Spinach (Raw)", "Eggs (Whole, Boiled)", "Greek Yogurt (Plain, Whole)"],
-    "dietary_notes": "Vital for vision, immunity, and skin barrier health. Beta-carotene in sweet potato converts to active Retinol in body.",
-    "supplements": ["Cod Liver Oil or Vitamin A Palmitate (5000 IU daily)"]
+    "recommended_foods": [
+      "Sweet Potato (Baked)",
+      "Carrot Poriyal",
+      "Keerai Poriyal (Spinach)",
+      "Beef Liver (Pan-fried)",
+      "Sarson Ka Saag",
+      "Amaranth Leaves Curry",
+      "Eggs (Whole, Boiled)",
+      "Salmon (Grilled)",
+      "Palak Paneer (Prepared)",
+      "Mango (Fresh)"
+    ],
+    "dietary_notes": "Vital for vision, immunity, and skin barrier health. Beta-carotene in sweet potato converts to active Retinol in the body.",
+    "supplements": ["Cod Liver Oil or Vitamin A Palmitate (5000 IU Daily)"]
   },
   "Vitamin C Deficiency": {
-    "recommended_foods": ["Oranges (Fresh)", "Spinach (Raw)", "Sweet Potato (Baked)", "Pumpkin Seeds (Roasted)"],
-    "dietary_notes": "Powerful antioxidant supporting collagen synthesis and iron uptake. Heat degrades Vit C, so consume fresh fruits raw.",
-    "supplements": ["Ascorbic Acid or Liposomal Vitamin C (500-1000 mg daily)"]
+    "recommended_foods": [
+      "Oranges (Fresh)",
+      "Carrot Poriyal",
+      "Tomato Rasam",
+      "Sweet Potato (Baked)",
+      "Keerai Poriyal (Spinach)",
+      "Drumstick Leaves Poriyal",
+      "Lemon Rice (Prepared)",
+      "Aloo Gobi (Prepared)",
+      "Avial (Mixed Vegetables)",
+      "Bell Peppers (Raw)"
+    ],
+    "dietary_notes": "Powerful antioxidant supporting collagen synthesis and iron uptake. Heat degrades Vit C, so consume fresh fruits raw when possible.",
+    "supplements": ["Ascorbic Acid or Liposomal Vitamin C (500-1000 mg Daily)"]
   },
   "Magnesium Deficiency": {
-    "recommended_foods": ["Pumpkin Seeds (Roasted)", "Almonds (Raw)", "Spinach (Raw)", "Lentils (Cooked)", "Cod Fish (Baked)"],
+    "recommended_foods": [
+      "Pumpkin Seeds (Roasted)",
+      "Almonds (Raw)",
+      "Keerai Poriyal (Spinach)",
+      "Brown Rice (Cooked)",
+      "Quinoa Upma",
+      "Chana Sundal",
+      "Peanut Sundal",
+      "Boiled Black Gram",
+      "Cod Fish (Baked)",
+      "Dal (Lentils, Cooked)"
+    ],
     "dietary_notes": "Regulates muscle relaxation, mood, and over 300 enzymatic pathways. High stress increases magnesium excretion.",
     "supplements": ["Magnesium Glycinate or Citrate (300-400 mg at night)"]
   },
-  "Iodine Deficiency": {
-    "recommended_foods": ["Cod Fish (Baked)", "Greek Yogurt (Plain, Whole)", "Eggs (Whole, Boiled)", "Salmon (Grilled)"],
-    "dietary_notes": "Essential for thyroid hormone production (T3/T4) and metabolic regulation. Use iodized salt or sea vegetables.",
-    "supplements": ["Potassium Iodide (150 mcg daily)"]
+  "Protein Deficiency": {
+    "recommended_foods": [
+      "Chicken Breast (Grilled)",
+      "Eggs (Whole, Boiled)",
+      "Paneer (Indian Cottage Cheese)",
+      "Greek Yogurt (Plain, Whole)",
+      "Soy Chunks Curry",
+      "Rajma Curry (Prepared)",
+      "Chole (Chickpea Curry)",
+      "Sardine Curry",
+      "Tandoori Chicken",
+      "Fish Fry (Prepared)"
+    ],
+    "dietary_notes": "Protein is essential for muscle repair, immune function, and enzyme production. Distribute intake across meals for optimal absorption. Combine plant proteins (rice + beans) for complete amino acid profiles.",
+    "supplements": ["Whey Protein or Plant-based Protein Powder (20-30g per serving)"]
   }
 }

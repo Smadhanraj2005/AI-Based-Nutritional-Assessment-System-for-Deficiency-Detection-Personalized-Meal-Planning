@@ -29,19 +29,19 @@ export default function ShapExplanationView({ shapExplanations }) {
                 return (
                   <div key={fIdx} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.83rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span style={{ 
-                        width: 8, 
-                        height: 8, 
-                        borderRadius: '50%', 
-                        background: isPositive ? '#ef4444' : '#10b981' 
+                      <span style={{
+                        width: 8,
+                        height: 8,
+                        borderRadius: '50%',
+                        background: isPositive ? '#ef4444' : '#10b981'
                       }} />
                       <strong style={{ color: '#fff' }}>{factor.feature}</strong>
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <span style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>{factor.value}</span>
-                      <span style={{ 
-                        fontWeight: 700, 
+                      <span style={{
+                        fontWeight: 700,
                         color: isPositive ? '#ef4444' : '#10b981',
                         background: isPositive ? 'rgba(239, 68, 68, 0.1)' : 'rgba(16, 185, 129, 0.1)',
                         padding: '2px 8px',

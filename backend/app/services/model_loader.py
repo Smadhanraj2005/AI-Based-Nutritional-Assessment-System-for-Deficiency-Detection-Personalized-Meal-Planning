@@ -4,15 +4,22 @@ import json
 import numpy as np
 from pathlib import Path
 
-# Path to the model directory (backend/models)
-BASE_DIR = Path(__file__).resolve().parent.parent.parent  # <project_root>/backend
-MODEL_DIR = BASE_DIR / "models"
+# Path to the ML model directory (backend/app/ml/models)
+BASE_DIR = Path(__file__).resolve().parent.parent  # <project_root>/backend/app
+ML_MODELS_DIR = BASE_DIR / "ml" / "models"
 
-MODEL_PATH = MODEL_DIR / "random_forest_model.pkl"
-METADATA_PATH = MODEL_DIR / "metadata.json"
+MODEL_PATH = ML_MODELS_DIR / "deficiency_model.joblib"
+SCALER_PATH = ML_MODELS_DIR / "scaler.joblib"
+METADATA_PATH = ML_MODELS_DIR / "metadata.json"
+
+# Fallback to backend/models if ML models dir is missing
+if not MODEL_PATH.exists():
+    FALLBACK_DIR = BASE_DIR.parent / "models"
+    MODEL_PATH = FALLBACK_DIR / "random_forest_model.pkl"
+    SCALER_PATH = FALLBACK_DIR / "scaler.joblib"
+    METADATA_PATH = FALLBACK_DIR / "metadata.json"
 
 if not MODEL_PATH.exists():
-    # Create placeholder file if missing
     MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
     MODEL_PATH.touch()
 
@@ -20,11 +27,10 @@ if not METADATA_PATH.exists():
     METADATA_PATH.parent.mkdir(parents=True, exist_ok=True)
     METADATA_PATH.touch()
 
-# Load the model and metadata at import time
+# Load the model at import time
 model = joblib.load(MODEL_PATH) if MODEL_PATH.stat().st_size > 0 else None
 
 # Load the scaler if present
-SCALER_PATH = MODEL_DIR / "scaler.joblib"
 if SCALER_PATH.exists() and SCALER_PATH.stat().st_size > 0:
     scaler = joblib.load(SCALER_PATH)
 else:

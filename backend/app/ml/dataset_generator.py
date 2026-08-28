@@ -1,115 +1,97 @@
 import numpy as np
 import pandas as pd
 
-def generate_nutritional_dataset(n_samples=2500, random_state=42):
+def generate_nutritional_dataset(n_samples=3000, random_state=42):
     """
-    Generates a realistic clinical synthetic dataset based on WHO/NHANES epidemiological 
-    patterns for multi-label micronutrient deficiency prediction.
+    Generates a realistic clinical synthetic dataset based on NHANES 2021-2023 patterns
+    for the 13-feature input and 10-label deficiency outputs.
     """
     np.random.seed(random_state)
     
     # Demographics
-    age = np.random.randint(18, 75, size=n_samples)
-    gender = np.random.binomial(1, 0.55, size=n_samples) # 1: Female, 0: Male
-    weight_kg = np.random.normal(70, 15, size=n_samples).clip(45, 120)
-    height_cm = np.random.normal(168, 10, size=n_samples).clip(145, 195)
-    bmi = weight_kg / ((height_cm / 100) ** 2)
+    gender = np.random.choice([1, 2], size=n_samples, p=[0.45, 0.55]) # 1 = male, 2 = female
+    age_years = np.random.randint(18, 80, size=n_samples)
     
-    # Dietary Intakes (% of RDA consumed daily: 20% to 150%)
-    iron_intake_pct = np.random.uniform(20, 140, size=n_samples)
-    vit_d_intake_pct = np.random.uniform(15, 130, size=n_samples)
-    vit_b12_intake_pct = np.random.uniform(10, 150, size=n_samples)
-    calcium_intake_pct = np.random.uniform(25, 140, size=n_samples)
-    folate_intake_pct = np.random.uniform(20, 140, size=n_samples)
-    zinc_intake_pct = np.random.uniform(25, 140, size=n_samples)
-    vit_a_intake_pct = np.random.uniform(20, 140, size=n_samples)
-    vit_c_intake_pct = np.random.uniform(20, 150, size=n_samples)
-    mag_intake_pct = np.random.uniform(25, 140, size=n_samples)
-    iodine_intake_pct = np.random.uniform(20, 140, size=n_samples)
+    # Nutrient intakes (daily averages)
+    calories_kcal = np.random.normal(1800, 400, size=n_samples).clip(800, 3500)
+    protein_g = np.random.normal(65, 15, size=n_samples).clip(20, 150)
+    iron_mg = np.random.normal(12, 4, size=n_samples).clip(2, 30)
+    calcium_mg = np.random.normal(800, 250, size=n_samples).clip(150, 2000)
+    vitamin_d_mcg = np.random.normal(8, 4, size=n_samples).clip(0, 30)
+    vitamin_b12_mcg = np.random.normal(3.0, 1.2, size=n_samples).clip(0.1, 10.0)
+    folate_mcg = np.random.normal(350, 100, size=n_samples).clip(50, 800)
+    vitamin_a_mcg = np.random.normal(650, 200, size=n_samples).clip(50, 1800)
+    vitamin_c_mg = np.random.normal(85, 30, size=n_samples).clip(5, 250)
+    magnesium_mg = np.random.normal(280, 70, size=n_samples).clip(50, 600)
+    zinc_mg = np.random.normal(9, 3, size=n_samples).clip(1, 25)
     
-    # Deficiency probabilities based on intake & demographic risk
-    p_iron = 1 / (1 + np.exp((iron_intake_pct - 65) / 15)) + (0.15 if gender.all() else 0.0)
-    p_vit_d = 1 / (1 + np.exp((vit_d_intake_pct - 60) / 15))
-    p_vit_b12 = 1 / (1 + np.exp((vit_b12_intake_pct - 55) / 15))
-    p_calcium = 1 / (1 + np.exp((calcium_intake_pct - 65) / 15))
-    p_folate = 1 / (1 + np.exp((folate_intake_pct - 60) / 15))
-    p_zinc = 1 / (1 + np.exp((zinc_intake_pct - 65) / 15))
-    p_vit_a = 1 / (1 + np.exp((vit_a_intake_pct - 60) / 15))
-    p_vit_c = 1 / (1 + np.exp((vit_c_intake_pct - 55) / 15))
-    p_mag = 1 / (1 + np.exp((mag_intake_pct - 65) / 15))
-    p_iodine = 1 / (1 + np.exp((iodine_intake_pct - 60) / 15))
+    # Labs (statistically correlated with intakes, used to build training labels)
+    # 1. Hemoglobin & Ferritin -> Iron
+    hb_mean = np.where(gender == 2, 11.5, 12.5) + (iron_mg - 12) * 0.1
+    hemoglobin = np.random.normal(hb_mean, 1.2).clip(7.0, 17.5)
+    ferritin = np.random.normal(25 + (iron_mg - 10) * 1.5, 12).clip(5, 150)
     
-    # Generate Target Labels (1: Deficient, 0: Normal)
-    target_iron = np.random.binomial(1, p_iron.clip(0.05, 0.95))
-    target_vit_d = np.random.binomial(1, p_vit_d.clip(0.05, 0.95))
-    target_vit_b12 = np.random.binomial(1, p_vit_b12.clip(0.05, 0.95))
-    target_calcium = np.random.binomial(1, p_calcium.clip(0.05, 0.95))
-    target_folate = np.random.binomial(1, p_folate.clip(0.05, 0.95))
-    target_zinc = np.random.binomial(1, p_zinc.clip(0.05, 0.95))
-    target_vit_a = np.random.binomial(1, p_vit_a.clip(0.05, 0.95))
-    target_vit_c = np.random.binomial(1, p_vit_c.clip(0.05, 0.95))
-    target_mag = np.random.binomial(1, p_mag.clip(0.05, 0.95))
-    target_iodine = np.random.binomial(1, p_iodine.clip(0.05, 0.95))
+    # 2. Serum Vit D (ng/mL)
+    serum_vit_d = np.random.normal(32 + (vitamin_d_mcg - 15) * 1.2, 8).clip(5, 80)
     
-    # Generate Symptom Features conditionally linked to target deficiencies
-    fatigue = np.random.binomial(1, (0.1 + 0.5 * target_iron + 0.3 * target_vit_d + 0.3 * target_vit_b12).clip(0.05, 0.95))
-    hair_loss = np.random.binomial(1, (0.05 + 0.4 * target_zinc + 0.3 * target_iron + 0.2 * target_folate).clip(0.05, 0.95))
-    pale_skin = np.random.binomial(1, (0.05 + 0.6 * target_iron + 0.3 * target_folate).clip(0.05, 0.95))
-    muscle_weakness = np.random.binomial(1, (0.08 + 0.5 * target_vit_d + 0.4 * target_mag + 0.3 * target_calcium).clip(0.05, 0.95))
-    mood_changes = np.random.binomial(1, (0.1 + 0.4 * target_vit_d + 0.4 * target_mag + 0.3 * target_vit_b12).clip(0.05, 0.95))
-    brittle_nails = np.random.binomial(1, (0.05 + 0.5 * target_iron + 0.4 * target_zinc + 0.3 * target_calcium).clip(0.05, 0.95))
-    bleeding_gums = np.random.binomial(1, (0.02 + 0.7 * target_vit_c).clip(0.02, 0.95))
-    dry_skin = np.random.binomial(1, (0.08 + 0.6 * target_vit_a + 0.3 * target_zinc).clip(0.05, 0.95))
-    cold_intolerance = np.random.binomial(1, (0.05 + 0.6 * target_iodine + 0.4 * target_iron).clip(0.05, 0.95))
-    slow_healing = np.random.binomial(1, (0.05 + 0.5 * target_vit_c + 0.5 * target_zinc).clip(0.05, 0.95))
+    # Define Targets based on clinical criteria (0 = not deficient, 1 = deficient)
+    # label_iron: Lab: low Hb (M<13 / F<12) OR ferritin<30; else iron intake < 8 mg
+    is_hb_low = np.where(gender == 2, hemoglobin < 12.0, hemoglobin < 13.0)
+    is_ferritin_low = ferritin < 30.0
+    label_iron = np.where(is_hb_low | is_ferritin_low, 1, np.where(iron_mg < 8.0, 1, 0))
     
-    # Generate Lab Values (Numerical with noise)
-    hemoglobin = np.where(target_iron == 1, np.random.normal(10.2, 1.1, size=n_samples), np.random.normal(13.8, 1.0, size=n_samples))
-    vit_d_level = np.where(target_vit_d == 1, np.random.normal(14.5, 3.5, size=n_samples), np.random.normal(32.0, 6.0, size=n_samples))
-    vit_b12_level = np.where(target_vit_b12 == 1, np.random.normal(160, 30, size=n_samples), np.random.normal(450, 90, size=n_samples))
-    serum_iron = np.where(target_iron == 1, np.random.normal(42, 10, size=n_samples), np.random.normal(95, 20, size=n_samples))
-    calcium_level = np.where(target_calcium == 1, np.random.normal(8.0, 0.4, size=n_samples), np.random.normal(9.6, 0.4, size=n_samples))
+    # label_vitamin_d: Lab: serum Vit D < 20.0 ng/mL; else intake < 15.0 mcg (600 IU)
+    label_vitamin_d = np.where(serum_vit_d < 20.0, 1, np.where(vitamin_d_mcg < 15.0, 1, 0))
+    
+    # label_vitamin_b12: Intake B12 < 2.4 mcg
+    label_vitamin_b12 = np.where(vitamin_b12_mcg < 2.4, 1, 0)
+    
+    # label_calcium: Intake calcium < 1000 mg
+    label_calcium = np.where(calcium_mg < 1000.0, 1, 0)
+    
+    # label_folate: Intake folate < 400 mcg
+    label_folate = np.where(folate_mcg < 400.0, 1, 0)
+    
+    # label_vitamin_a: Intake Vit A < 700 mcg
+    label_vitamin_a = np.where(vitamin_a_mcg < 700.0, 1, 0)
+    
+    # label_vitamin_c: Intake Vit C < 75 mg
+    label_vitamin_c = np.where(vitamin_c_mg < 75.0, 1, 0)
+    
+    # label_magnesium: Intake magnesium < 320 mg
+    label_magnesium = np.where(magnesium_mg < 320.0, 1, 0)
+    
+    # label_zinc: Intake zinc < 8 mg
+    label_zinc = np.where(zinc_mg < 8.0, 1, 0)
+    
+    # label_protein: Intake protein < 50 g
+    label_protein = np.where(protein_g < 50.0, 1, 0)
     
     df = pd.DataFrame({
-        "age": age,
         "gender": gender,
-        "bmi": bmi,
-        "iron_intake_pct": iron_intake_pct,
-        "vit_d_intake_pct": vit_d_intake_pct,
-        "vit_b12_intake_pct": vit_b12_intake_pct,
-        "calcium_intake_pct": calcium_intake_pct,
-        "folate_intake_pct": folate_intake_pct,
-        "zinc_intake_pct": zinc_intake_pct,
-        "vit_a_intake_pct": vit_a_intake_pct,
-        "vit_c_intake_pct": vit_c_intake_pct,
-        "mag_intake_pct": mag_intake_pct,
-        "iodine_intake_pct": iodine_intake_pct,
-        "fatigue": fatigue,
-        "hair_loss": hair_loss,
-        "pale_skin": pale_skin,
-        "muscle_weakness": muscle_weakness,
-        "mood_changes": mood_changes,
-        "brittle_nails": brittle_nails,
-        "bleeding_gums": bleeding_gums,
-        "dry_skin": dry_skin,
-        "cold_intolerance": cold_intolerance,
-        "slow_healing": slow_healing,
-        "hemoglobin_g_dl": hemoglobin.clip(6.0, 18.0),
-        "vit_d_ng_ml": vit_d_level.clip(5.0, 70.0),
-        "vit_b12_pg_ml": vit_b12_level.clip(50.0, 1000.0),
-        "serum_iron_mcg_dl": serum_iron.clip(10.0, 200.0),
-        "calcium_mg_dl": calcium_level.clip(6.0, 12.0),
+        "age_years": age_years,
+        "calories_kcal": calories_kcal,
+        "protein_g": protein_g,
+        "iron_mg": iron_mg,
+        "calcium_mg": calcium_mg,
+        "vitamin_d_mcg": vitamin_d_mcg,
+        "vitamin_b12_mcg": vitamin_b12_mcg,
+        "folate_mcg": folate_mcg,
+        "vitamin_a_mcg": vitamin_a_mcg,
+        "vitamin_c_mg": vitamin_c_mg,
+        "magnesium_mg": magnesium_mg,
+        "zinc_mg": zinc_mg,
         # Targets
-        "target_iron": target_iron,
-        "target_vit_d": target_vit_d,
-        "target_vit_b12": target_vit_b12,
-        "target_calcium": target_calcium,
-        "target_folate": target_folate,
-        "target_zinc": target_zinc,
-        "target_vit_a": target_vit_a,
-        "target_vit_c": target_vit_c,
-        "target_mag": target_mag,
-        "target_iodine": target_iodine
+        "label_iron": label_iron,
+        "label_vitamin_d": label_vitamin_d,
+        "label_vitamin_b12": label_vitamin_b12,
+        "label_calcium": label_calcium,
+        "label_folate": label_folate,
+        "label_vitamin_a": label_vitamin_a,
+        "label_vitamin_c": label_vitamin_c,
+        "label_magnesium": label_magnesium,
+        "label_zinc": label_zinc,
+        "label_protein": label_protein
     })
     
     return df
@@ -117,3 +99,4 @@ def generate_nutritional_dataset(n_samples=2500, random_state=42):
 if __name__ == "__main__":
     df = generate_nutritional_dataset()
     print(f"Generated synthetic clinical dataset with {df.shape[0]} rows and {df.shape[1]} features/targets.")
+

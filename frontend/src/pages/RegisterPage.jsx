@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import {
-  HeartPulse, Mail, Lock, Eye, EyeOff, User, ArrowRight,
+  HeartPulse, Mail, Lock, Eye, EyeOff, User, ArrowRight, ArrowLeft,
   AlertCircle, CheckCircle2, ChevronDown
 } from 'lucide-react';
 import { registerUser } from '../services/api';
+import logoImg from '../assets/logo.png';
 
 const dietaryOptions = ['Vegetarian', 'Vegan', 'Gluten-free', 'Dairy-free', 'Nut allergy'];
 const activityLevels = ['Sedentary', 'Lightly active', 'Moderately active', 'Very active'];
@@ -13,10 +14,10 @@ const passwordStrength = (pw) => {
   const score = [pw.length >= 8, /[A-Z]/.test(pw), /[0-9]/.test(pw), /[^A-Za-z0-9]/.test(pw)].filter(Boolean).length;
   const levels = [
     { label: 'Too short', color: '#ef4444', width: '20%' },
-    { label: 'Weak',       color: '#ef4444', width: '30%' },
-    { label: 'Fair',       color: '#f59e0b', width: '55%' },
-    { label: 'Good',       color: '#10b981', width: '80%' },
-    { label: 'Strong',     color: '#6366f1', width: '100%' },
+    { label: 'Weak', color: '#ef4444', width: '30%' },
+    { label: 'Fair', color: '#f59e0b', width: '55%' },
+    { label: 'Good', color: '#10b981', width: '80%' },
+    { label: 'Strong', color: '#6366f1', width: '100%' },
   ];
   return levels[Math.min(score, 4)];
 };
@@ -105,15 +106,20 @@ export default function RegisterPage({ onAuthSuccess, onGoToLogin }) {
 
         {/* Logo header */}
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <div style={{
-            width: 56, height: 56, borderRadius: 16, margin: '0 auto 12px',
-            background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 8px 28px rgba(16, 185, 129, 0.45)'
-          }}>
-            <HeartPulse size={32} color="#fff" />
-          </div>
-          <h1 style={{ fontSize: '1.9rem', fontWeight: 800, color: '#fff', margin: '0 0 4px' }}>Create your account</h1>
+          <img
+            src={logoImg}
+            alt="NutriAI Logo"
+            style={{
+              width: 56,
+              height: 56,
+              borderRadius: 16,
+              margin: '0 auto 12px',
+              objectFit: 'cover',
+              boxShadow: '0 8px 28px rgba(16, 185, 129, 0.45)',
+              border: '1px solid rgba(16, 185, 129, 0.3)'
+            }}
+          />
+          <h1 style={{ fontSize: '1.9rem', fontWeight: 800, color: "var(--text-main)", margin: '0 0 4px' }}>Create your account</h1>
           <p style={{ fontSize: '0.87rem', color: 'var(--text-muted)', margin: 0 }}>
             Join NutriAI and start your personalized deficiency assessment today.
           </p>
@@ -133,8 +139,8 @@ export default function RegisterPage({ onAuthSuccess, onGoToLogin }) {
                   background: step > s
                     ? '#10b981'
                     : step === s
-                    ? 'linear-gradient(135deg, #10b981, #059669)'
-                    : 'rgba(255,255,255,0.06)',
+                      ? 'linear-gradient(135deg, #10b981, #059669)'
+                      : 'rgba(255,255,255,0.06)',
                   border: step === s ? '2px solid #10b981' : step < s ? '2px solid rgba(255,255,255,0.1)' : 'none',
                   color: step >= s ? '#fff' : 'var(--text-muted)',
                   boxShadow: step === s ? '0 0 12px rgba(16,185,129,0.4)' : 'none',
@@ -143,7 +149,7 @@ export default function RegisterPage({ onAuthSuccess, onGoToLogin }) {
                   {step > s ? <CheckCircle2 size={17} /> : s}
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.8rem', fontWeight: 600, color: step >= s ? '#fff' : 'var(--text-muted)' }}>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 600, color: step >= s ? "var(--text-main)" : 'var(--text-muted)' }}>
                     {s === 1 ? 'Account Details' : 'Health Profile'}
                   </div>
                   <div style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>
@@ -176,7 +182,7 @@ export default function RegisterPage({ onAuthSuccess, onGoToLogin }) {
           {/* ── STEP 1: Account ── */}
           {step === 1 && (
             <form onSubmit={handleStep1Next} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-              <h3 style={{ fontSize: '1.15rem', color: '#fff', margin: '0 0 4px' }}>Account Details</h3>
+              <h3 style={{ fontSize: '1.15rem', color: "var(--text-main)", margin: '0 0 4px' }}>Account Details</h3>
 
               <div>
                 <label className="form-label">Full Name</label>
@@ -332,7 +338,7 @@ export default function RegisterPage({ onAuthSuccess, onGoToLogin }) {
                           fontSize: '0.82rem', fontWeight: 500,
                           border: active ? '1px solid #10b981' : '1px solid var(--border-glass)',
                           background: active ? 'rgba(16,185,129,0.2)' : 'rgba(255,255,255,0.04)',
-                          color: active ? '#10b981' : '#fff',
+                          color: active ? '#10b981' : '#000000ff',
                           cursor: 'pointer', transition: 'all 0.2s ease'
                         }}
                       >
@@ -349,9 +355,9 @@ export default function RegisterPage({ onAuthSuccess, onGoToLogin }) {
                   type="button"
                   onClick={() => { setStep(1); setError(''); }}
                   className="btn-secondary"
-                  style={{ flex: 1, padding: '12px', justifyContent: 'center' }}
+                  style={{ flex: 1, padding: '12px', justifyContent: 'center', display: 'inline-flex', alignItems: 'center', gap: 6 }}
                 >
-                  ← Back
+                  <ArrowLeft size={16} /> Back
                 </button>
                 <button
                   type="submit"
@@ -372,9 +378,9 @@ export default function RegisterPage({ onAuthSuccess, onGoToLogin }) {
           <button
             type="button"
             onClick={onGoToLogin}
-            style={{ background: 'none', border: 'none', color: '#10b981', fontWeight: 600, cursor: 'pointer', fontSize: '0.87rem' }}
+            style={{ background: 'none', border: 'none', color: '#10b981', fontWeight: 600, cursor: 'pointer', fontSize: '0.87rem', display: 'inline-flex', alignItems: 'center', gap: 4 }}
           >
-            Sign in →
+            Sign in <ArrowRight size={14} />
           </button>
         </p>
 

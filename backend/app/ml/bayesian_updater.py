@@ -11,56 +11,61 @@ def apply_bayesian_lab_updates(prior_probs, lab_data, gender=1):
         return posterior_probs, bayesian_boosts
 
     # 1. Hemoglobin (g/dL) -> Iron Deficiency Anemia
-    if "hemoglobin_g_dl" in lab_data and lab_data["hemoglobin_g_dl"] is not None:
-        hb = float(lab_data["hemoglobin_g_dl"])
-        cutoff = 12.0 if gender == 1 else 13.0
+    hb_val = lab_data.get("hemoglobin_g_dl") or lab_data.get("hemoglobin")
+    if hb_val is not None and float(hb_val) > 0:
+        hb = float(hb_val)
+        cutoff = 13.0 if gender == 1 else 12.0
         if hb < cutoff:
             severity_factor = (cutoff - hb) / 2.0
-            lr = 3.5 + (severity_factor * 2.0) # Likelihood Ratio for deficiency
+            lr = 3.5 + (severity_factor * 2.0)
             prior = posterior_probs.get("Iron Deficiency (Anemia)", 0.2)
             post = (prior * lr) / ((prior * lr) + (1.0 - prior))
             posterior_probs["Iron Deficiency (Anemia)"] = min(0.98, post)
             bayesian_boosts["Iron Deficiency (Anemia)"] = f"Hemoglobin level of {hb} g/dL is below standard threshold ({cutoff} g/dL). Likelihood ratio {lr:.1f}x applied."
 
-    # 2. Vitamin D 25-OH (ng/mL) -> Vitamin D Deficiency
-    if "vit_d_ng_ml" in lab_data and lab_data["vit_d_ng_ml"] is not None:
-        vit_d = float(lab_data["vit_d_ng_ml"])
-        if vit_d < 30.0:
+    # 2. Vitamin D 25-OH -> Vitamin D Deficiency
+    vit_d_val = lab_data.get("vit_d_ng_ml") if lab_data.get("vit_d_ng_ml") is not None else lab_data.get("serum_vitamin_d")
+    if vit_d_val is not None and float(vit_d_val) > 0:
+        vit_d = float(vit_d_val)
+        if vit_d < 50.0:
             lr = 4.5 if vit_d < 20.0 else 2.5
             prior = posterior_probs.get("Vitamin D Deficiency", 0.2)
             post = (prior * lr) / ((prior * lr) + (1.0 - prior))
             posterior_probs["Vitamin D Deficiency"] = min(0.98, post)
-            bayesian_boosts["Vitamin D Deficiency"] = f"Vitamin D 25-OH is {vit_d} ng/mL (Deficient/Insufficient < 30 ng/mL). Likelihood ratio {lr:.1f}x applied."
+            bayesian_boosts["Vitamin D Deficiency"] = f"Serum Vitamin D is {vit_d} (Insufficient < 50). Likelihood ratio {lr:.1f}x applied."
 
     # 3. Vitamin B12 (pg/mL) -> Vitamin B12 Deficiency
-    if "vit_b12_pg_ml" in lab_data and lab_data["vit_b12_pg_ml"] is not None:
-        b12 = float(lab_data["vit_b12_pg_ml"])
-        if b12 < 300.0:
-            lr = 5.0 if b12 < 200.0 else 2.5
+    b12_val = lab_data.get("vit_b12_pg_ml") if lab_data.get("vit_b12_pg_ml") is not None else lab_data.get("vitamin_b12")
+    if b12_val is not None and float(b12_val) > 0:
+        b12 = float(b12_val)
+        if b12 < 200.0:
+            lr = 5.0
             prior = posterior_probs.get("Vitamin B12 Deficiency", 0.2)
             post = (prior * lr) / ((prior * lr) + (1.0 - prior))
             posterior_probs["Vitamin B12 Deficiency"] = min(0.98, post)
             bayesian_boosts["Vitamin B12 Deficiency"] = f"Serum Vitamin B12 level is {b12} pg/mL (Deficient < 200 pg/mL). Likelihood ratio {lr:.1f}x applied."
 
-    # 4. Serum Iron (mcg/dL) -> Iron Deficiency
-    if "serum_iron_mcg_dl" in lab_data and lab_data["serum_iron_mcg_dl"] is not None:
-        iron = float(lab_data["serum_iron_mcg_dl"])
-        if iron < 60.0:
+    # 4. Ferritin (ng/mL) -> Iron Deficiency
+    ferritin_val = lab_data.get("ferritin")
+    if ferritin_val is not None and float(ferritin_val) > 0:
+        ferritin = float(ferritin_val)
+        if ferritin < 30.0:
             lr = 3.5
             prior = posterior_probs.get("Iron Deficiency (Anemia)", 0.2)
             post = (prior * lr) / ((prior * lr) + (1.0 - prior))
             posterior_probs["Iron Deficiency (Anemia)"] = min(0.98, post)
             if "Iron Deficiency (Anemia)" not in bayesian_boosts:
-                bayesian_boosts["Iron Deficiency (Anemia)"] = f"Serum Iron is {iron} mcg/dL (Low < 60 mcg/dL)."
+                bayesian_boosts["Iron Deficiency (Anemia)"] = f"Ferritin level of {ferritin} ng/mL is low (< 30 ng/mL)."
 
     # 5. Serum Calcium (mg/dL) -> Calcium Deficiency
-    if "calcium_mg_dl" in lab_data and lab_data["calcium_mg_dl"] is not None:
-        cal = float(lab_data["calcium_mg_dl"])
-        if cal < 8.6:
+    calc_val = lab_data.get("calcium_mg_dl") if lab_data.get("calcium_mg_dl") is not None else lab_data.get("calcium")
+    if calc_val is not None and float(calc_val) > 0:
+        cal = float(calc_val)
+        if cal < 8.5:
             lr = 4.0
             prior = posterior_probs.get("Calcium Deficiency", 0.2)
             post = (prior * lr) / ((prior * lr) + (1.0 - prior))
             posterior_probs["Calcium Deficiency"] = min(0.98, post)
-            bayesian_boosts["Calcium Deficiency"] = f"Serum Calcium is {cal} mg/dL (Hypocalcemia < 8.6 mg/dL)."
+            bayesian_boosts["Calcium Deficiency"] = f"Serum Calcium is {cal} mg/dL (Hypocalcemia < 8.5 mg/dL)."
 
     return posterior_probs, bayesian_boosts

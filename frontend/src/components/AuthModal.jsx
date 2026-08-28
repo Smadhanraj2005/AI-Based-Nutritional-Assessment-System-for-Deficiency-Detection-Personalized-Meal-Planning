@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Lock, Mail, User, ShieldCheck, ArrowRight, Sparkles, AlertCircle } from 'lucide-react';
+import { X, Lock, Mail, User, ShieldCheck, ArrowRight, Sparkles, AlertCircle, Check, Plus } from 'lucide-react';
 import { loginUser, registerUser } from '../services/api';
 
 export default function AuthModal({ isOpen, onClose, onAuthSuccess }) {
@@ -287,10 +287,13 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess }) {
                         border: active ? '1px solid #10b981' : '1px solid var(--border-glass)',
                         background: active ? 'rgba(16, 185, 129, 0.15)' : 'transparent',
                         color: active ? '#10b981' : 'var(--text-muted)',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 4
                       }}
                     >
-                      {active ? '✓ ' : '+ '}{res}
+                      {active ? <Check size={12} /> : <Plus size={12} />}{res}
                     </button>
                   );
                 })}

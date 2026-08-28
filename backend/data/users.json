@@ -76,5 +76,112 @@
       "Vegetarian"
     ],
     "token": "token_4913856251818529890_mad"
+  },
+  {
+    "name": "Siva",
+    "email": "itsiva25@gmail.com",
+    "password": "liosiv@01",
+    "age": 21,
+    "gender": "Male",
+    "weight_kg": 65.0,
+    "height_kg": 170.0,
+    "dietary_restrictions": [],
+    "token": "token_-3538198316510953851_Siv"
+  },
+  {
+    "name": "Madhan",
+    "email": "adhan@gmail.com",
+    "password": "Madhanraj@2005",
+    "age": 20,
+    "gender": "Male",
+    "weight_kg": 65.0,
+    "height_kg": 170.0,
+    "dietary_restrictions": [
+      "Vegetarian"
+    ],
+    "token": "token_-7534694219694581475_Mad"
+  },
+  {
+    "name": "Test User",
+    "email": "testuser1@example.com",
+    "password": "Password123!",
+    "age": 25,
+    "gender": "Female",
+    "weight_kg": 65.0,
+    "height_kg": 170.0,
+    "dietary_restrictions": [],
+    "token": "token_7963940887926842508_Tes"
+  },
+  {
+    "name": "Jane Doe",
+    "email": "jane_9e0460@example.com",
+    "password": "securepassword",
+    "age": 29,
+    "gender": "Female",
+    "weight_kg": 65.0,
+    "height_kg": 170.0,
+    "dietary_restrictions": [
+      "Vegan"
+    ],
+    "token": "token_3108551378155364020_Jan"
+  },
+  {
+    "name": "Jane Doe",
+    "email": "jane_346b62@example.com",
+    "password": "securepassword",
+    "age": 29,
+    "gender": "Female",
+    "weight_kg": 65.0,
+    "height_kg": 170.0,
+    "dietary_restrictions": [
+      "Vegan"
+    ],
+    "token": "token_-3509843787023140800_Jan"
+  },
+  {
+    "name": "Jane Doe",
+    "email": "jane_ec3aab@example.com",
+    "password": "securepassword",
+    "age": 29,
+    "gender": "Female",
+    "weight_kg": 65.0,
+    "height_kg": 170.0,
+    "dietary_restrictions": [
+      "Vegan"
+    ],
+    "token": "token_529800337415435099_Jan"
+  },
+  {
+    "name": "guru",
+    "email": "guru@gmail.com",
+    "password": "guru@12345",
+    "age": 25,
+    "gender": "Female",
+    "weight_kg": 65.0,
+    "height_kg": 170.0,
+    "dietary_restrictions": [],
+    "token": "token_-4103304661374154424_gur"
+  },
+  {
+    "name": "Verify User",
+    "email": "test_fd774b@nutriai.com",
+    "password": "testpass123",
+    "age": 22,
+    "gender": "Female",
+    "weight_kg": 65.0,
+    "height_kg": 170.0,
+    "dietary_restrictions": [],
+    "token": "token_-5814673989181686270_Ver"
+  },
+  {
+    "name": "janr",
+    "email": "janr@gmail.com",
+    "password": "Maddy@12",
+    "age": 25,
+    "gender": "Female",
+    "weight_kg": 65.0,
+    "height_kg": 170.0,
+    "dietary_restrictions": [],
+    "token": "token_8830540215224758400_jan"
   }
 ]
