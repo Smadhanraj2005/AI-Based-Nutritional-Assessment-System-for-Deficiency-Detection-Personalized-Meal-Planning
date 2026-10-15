@@ -286,10 +286,10 @@ class TestLabBoost:
 # ══════════════════════════════════════════════════════════════
 class TestWellnessScore:
     def test_formula_basic(self):
-        """Wellness score = round(55 + (1 - avg_risk) * 45, 1)."""
+        """Wellness score = round((1.0 - avg) * 100.0, 1)."""
         probs = [0.2, 0.4, 0.6]
         avg = sum(probs) / len(probs)  # 0.4
-        expected = round(55.0 + (1.0 - avg) * 45.0, 1)  # 55 + 0.6 * 45 = 82.0
+        expected = round((1.0 - avg) * 100.0, 1)  # 60.0
         assert calculate_wellness_score(probs) == expected
 
     def test_all_zero_risk(self):
@@ -297,14 +297,14 @@ class TestWellnessScore:
         assert calculate_wellness_score([0.0] * 10) == 100.0
 
     def test_all_max_risk(self):
-        """All 1.0 probabilities → score = 55.0."""
-        assert calculate_wellness_score([1.0] * 10) == 55.0
+        """All 1.0 probabilities → score = 0.0."""
+        assert calculate_wellness_score([1.0] * 10) == 0.0
 
-    def test_bounded_55_100(self):
-        """Score should never exceed [55, 100]."""
-        assert 55 <= calculate_wellness_score([0.5]) <= 100
-        assert 55 <= calculate_wellness_score([0.99]) <= 100
-        assert 55 <= calculate_wellness_score([0.01]) <= 100
+    def test_bounded_0_100(self):
+        """Score should never exceed [0, 100]."""
+        assert 0 <= calculate_wellness_score([0.5]) <= 100
+        assert 0 <= calculate_wellness_score([0.99]) <= 100
+        assert 0 <= calculate_wellness_score([0.01]) <= 100
 
     def test_score_sensitivity(self):
         """Changing risk probabilities changes the Wellness Score."""
