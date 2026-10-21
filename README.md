@@ -195,16 +195,13 @@ When clinical blood laboratory values are entered, deterministic clinical safety
 | **Serum Calcium** | $<8.5\text{ mg/dL}$ | $\text{calcium\_risk} = \max(\text{model}, 0.55)$ |
 
 ### 4. Overall Health & Wellness Score Formula
-The overall wellness score is a bounded metric ($0.0 - 100.0$) reflecting overall nutritional sufficiency:
+The overall wellness score is a bounded metric ($0.0 - 100.0$) reflecting overall nutritional sufficiency
 
-$$\overline{\text{Risk}} = \frac{1}{10}\sum_{k=1}^{10} P_k(\text{Deficiency})$$
-
-$$\text{Wellness Score} = \max\left(0.0,\ \min\left(100.0,\ \text{round}\left((1.0 - \overline{\text{Risk}}) \times 100,\ 1\right)\right)\right)$$
 
 ### 5. Explainable AI (SHAP)
-Using SHAP KernelExplainer, the system computes local additive feature attributions:
+Using SHAP KernelExplainer, the system computes local additive feature attributions
 
-$$f(x) = \phi_0 + \sum_{i=1}^{M} \phi_i$$
+
 
 Where $\phi_i$ quantifies the exact percentage impact that low daily nutrient consumption versus physical symptom presence had on pushing the risk score higher (red) or lower (green).
 
@@ -224,7 +221,7 @@ Recommendations and meal planning are **rule-based, multi-constraint heuristic o
    - *Nut Allergy* (drops almonds, peanuts, walnuts, cashews)
    - *Keto / Low-Carb*
 4. **Ranking Algorithm:**
-   $$\text{ORDER BY } \text{source\_priority ASC, } \text{nutrient\_density\_per\_100g DESC}$$
+   
    *(Prioritizes culturally relevant / curated Indian foods over generic USDA raw produce).*
 5. **7-Day Itinerary Composition:** Selects top 6 dense foods per deficient nutrient and constructs balanced **Breakfast**, **Lunch**, **Dinner**, and **Snack** plans satisfying caloric target windows and macronutrient ratios (Carbohydrates 45–65%, Protein 15–25%, Fats 20–35%).
 
