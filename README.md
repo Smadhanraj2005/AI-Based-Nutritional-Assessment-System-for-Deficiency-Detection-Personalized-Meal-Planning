@@ -152,11 +152,7 @@ graph TD
 ## 🧠 Machine Learning & Explainable AI Pipeline
 
 ### 1. The 13-Feature Input Vector
-The machine learning model operates strictly on clinical and dietary aggregates. Individual food names are not passed to the model; instead, food diaries are aggregated across distinct logged days (minimum 3 required) into standardized daily averages:
-
-$$\text{nutrient\_logged} = \left(\frac{\text{nutrient\_per\_100g}}{100}\right) \times \text{portion\_grams}$$
-
-$$\text{average\_nutrient} = \frac{\sum_{i=1}^{N} \text{daily\_total}_i}{N_{\text{distinct days}}}$$
+The machine learning model operates strictly on clinical and dietary aggregates. Individual food names are not passed to the model; instead, food diaries are aggregated across distinct logged days (minimum 3 required) into standardized daily averages
 
 | # | Feature Name | Source | Clinical Meaning |
 | :---: | :--- | :--- | :--- |
