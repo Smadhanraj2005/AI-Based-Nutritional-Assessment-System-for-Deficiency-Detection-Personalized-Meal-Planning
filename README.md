@@ -188,11 +188,11 @@ When clinical blood laboratory values are entered, deterministic clinical safety
 
 | Biomarker | Clinical Cutoff | Action / Bayesian Update |
 | :--- | :--- | :--- |
-| **Hemoglobin (Hb)** | Male $<13.0\text{ g/dL}$, Female $<12.0\text{ g/dL}$ | $\text{iron\_risk} = \max(\text{model}, 0.75)$ (High Risk) |
-| **Serum Ferritin** | $<30.0\text{ ng/mL}$ | $\text{iron\_risk} = \max(\text{model}, 0.70)$ (High Risk) |
-| **Serum Vitamin D** | $<50.0\text{ nmol/L}$ | $\text{vitamin\_d\_risk} = \max(\text{model}, 0.65)$ (Moderate Band) |
-| **Vitamin B12** | $<200.0\text{ pg/mL}$ | $\text{b12\_risk} = \max(\text{model}, 0.60)$ (Moderate/High) |
-| **Serum Calcium** | $<8.5\text{ mg/dL}$ | $\text{calcium\_risk} = \max(\text{model}, 0.55)$ |
+| **Hemoglobin (Hb)** | Male <13.0\text{ g/dL}, Female <12.0\text{ g/dL} | \text{iron\_risk} = \max(\text{model}, 0.75)$ (High Risk) |
+| **Serum Ferritin** | <30.0\text{ ng/mL}$ | \text{iron\_risk} = \max(\text{model}, 0.70) (High Risk) |
+| **Serum Vitamin D** | <50.0\text{ nmol/L} | \text{vitamin\_d\_risk} = \max(\text{model}, 0.65) (Moderate Band) |
+| **Vitamin B12** | <200.0\text{ pg/mL} | $\text{b12\_risk} = \max(\text{model}, 0.60)$ (Moderate/High) |
+| **Serum Calcium** | <8.5\text{ mg/dL} | $\text{calcium\_risk} = \max(\text{model}, 0.55)$ |
 
 ### 4. Overall Health & Wellness Score Formula
 The overall wellness score is a bounded metric ($0.0 - 100.0$) reflecting overall nutritional sufficiency
